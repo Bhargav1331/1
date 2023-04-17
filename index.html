@@ -1,5 +1,16 @@
 .................................................. SYNCH QUERY IN NODEJS.....................
 
+const express = require('express')
+const app = express()
+const mysql = require('mysql');
+const con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "library"
+});
+
+
 const query = (sql) => {
     return new Promise((resolve, reject) => {
         con.query(sql, (err, result) => {
@@ -12,5 +23,12 @@ const query = (sql) => {
     });
 };
 
+app.use('/abc', async (req, res) => {
+
+    const result1 = await query("SELECT * FROM tblbooks where AuthorId='1'");
+    console.log(result1);
+    res.send(result1)
+})
+app.listen(3000)
 
 ...................................................................................................
