@@ -31,4 +31,59 @@ app.use('/abc', async (req, res) => {
 })
 app.listen(3000)
 
-...................................................................................................
+.................................................image or body data using express-fileupload..................................................
+const express = require('express');
+const app = express();
+const uploader = require('express-fileupload');
+const path = require('path');
+// Set up the view engine to use EJS
+app.set('view engine', 'ejs');
+app.use(uploader());
+
+// Set up the routes
+app.post('/upload', (req, res) => {
+    const imageFiles = req.files['image'];
+    console.log(imageFiles)
+    console.log(req.body.ip)
+    const folderPath = path.join(__dirname, 'a');
+    const filePath = path.join(folderPath, imageFiles.name);
+    imageFiles.mv(filePath, (err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err);
+        }
+        else {
+            res.send('Image files uploaded successfully.');
+        }
+    });
+
+});
+
+app.get('/', (req, res) => {
+    res.render('index', { title: 'Welcome' });
+});
+
+// Start the server
+app.listen(3002, () => {
+    console.log('Server started on port 3002');
+});
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" multiple>
+    <input type="text" name="ip">
+    <button type="submit">Upload</button>
+</form>
+
+
+...................................................................................................................
+
+
+
+
+
+
+
+
+
+
+
