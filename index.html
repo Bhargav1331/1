@@ -75,11 +75,38 @@ app.listen(3002, () => {
 </form>
 
 
-...................................................................................................................
+..........................................................AJAX_JQUERY.........................................................
 
 
 
+<!-- HTML form -->
+<form id="myForm">
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <input type="button" onclick="a()" value="Submit">
+</form>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function a() {
+  var formData = $('#myForm').serialize(); // get form data as a serialized string
+  
+  $.ajax({
+    url: 'https://api.genderize.io/?name=luc',
+    type: 'POST',
+    dataType: 'json',
+    success: function(data) {
+      console.log(data); // success callback, data variable contains the response data
+    },
+    error: function(xhr, status, error) {
+      console.log(error); // error callback, error variable contains the error message
+    }
+  });
+}
+</script>
+
+
+....................................................................................................................................
 
 
 
