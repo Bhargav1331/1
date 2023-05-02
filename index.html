@@ -1,6 +1,8 @@
 1.SYNCH QUERY IN NODEJS.
 2.express-fileupload
 3.AJAX_JQUERY
+4.mongoDB
+5.Mongoose
 
 
 
@@ -115,9 +117,58 @@ function a() {
 </script>
 
 
-....................................................................................................................................
+..................................................................MongoDB..................................................................
+
+const { MongoClient } = require('mongodb');
+// or as an es module:
+// import { MongoClient } from 'mongodb'
+
+// Connection URL
+const url = 'mongodb://127.0.0.1:27017';
+const client = new MongoClient(url);
 
 
+// Database Name
+const dbName = 'myProject';
+
+async function main() {
+    // Use connect method to connect to the server
+    // Use connect method to connect to the server
+    await client.connect();
+    console.log('Connected successfully to server');
+    const db = client.db(dbName);
+    const collection = db.collection('documents');
+
+    const insertResult = await collection.insertMany([{ name: 'Bhargav', age: 21, mobile: 1234567890 }, { age: 21 }, { age: 21, mobile: 1234567890, city: 'surat' }]);
+
+    console.log('Inserted documents =>', insertResult);
+    // the following code examples can be pasted here...
+    return 'done.';
+
+}
+
+main()
+    .then(console.log)
+    .catch(console.error)
+    .finally(() => client.close());
+
+..............................................Mongoose......................................
+
+
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://127.0.0.1:27017/database_name').then(() => console.log('okey'))
+    .catch(() => { console.log('not okey') })
+
+const newschema = new mongoose.Schema({
+
+    name: {
+        type: String,
+        required: true
+    }
+})
+
+
+module.exports = new mongoose.model('table_name', newschema)
 
 
 
