@@ -4,6 +4,8 @@
 3.AJAX_JQUERY
 4.mongoDB
 5.Mongoose
+6.CallBack
+7.Wiht-out callback
 
 
 
@@ -172,6 +174,58 @@ const newschema = new mongoose.Schema({
 
 
 module.exports = new mongoose.model('table_name', newschema)
+
+
+..........................................CallBack.................................................
+function all(a, b) {
+
+    function sum(a, b) {
+        console.log("sumation:");
+        let result = a + b;
+        console.log(result);
+    }
+    function sub(a, b) {
+        console.log("subtraction :");
+        let result = a - b;
+        console.log(result);
+    }
+
+
+    setTimeout(function () {
+        sum(11, 6, function () { sub(11, 6) })
+    }, 1000);
+
+}
+all(11, 6);
+
+
+
+
+..........................................WithOut-CallBack.................................................
+function all(a, b) {
+
+    function sum(a, b, callback) {
+        console.log("sumation:");
+        let result = a + b;
+        console.log(result);
+        callback();
+    }
+    function sub(a, b) {
+        console.log("subtraction :");
+        let result = a - b;
+        console.log(result);
+    }
+
+
+    setTimeout(function () {
+        sum(11, 6)
+    }, 1000);
+ sub(11, 6) 
+}
+all(11, 6);
+
+
+
 
 
 
