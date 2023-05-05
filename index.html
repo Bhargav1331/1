@@ -7,6 +7,7 @@
 6.CallBack
 7.Wiht-out callback
 8.Git-Hub command
+9.send-wish
 
 
 
@@ -256,6 +257,38 @@ git checkout <branch>: Switches to a specified branch.
 git merge <branch>: Merges the specified branch with the current branch.
 
 git log: Shows a log of all previous commits to the repository.
+
+
+    ...........................................sen-wish....................................................................
+    const nodemailer = require('nodemailer');
+
+// create transporter object with SMTP configuration
+let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'silicon.bhargav@gmail.com',
+        pass: 'tremcegbhajjdtxw'
+    }
+});
+
+// create mail options
+let mailOptions = {
+    from: 'silicon.bhargav@gmail.com',
+    to: 'bhargavkakadiya2805@gmail.com',
+    subject: 'Test email',
+    html: "<!DOCTYPE html><html><head>    <title>Happy Birthday!</title>    <style>        body {            background-color: #F8E0E0;            font-family: Arial, sans-serif;            text-align: center;        }        h1 {            font-size: 48px;            color: #FF5733;            margin-top: 50px;        }        p {            font-size: 24px;            color: #333333;            margin-bottom: 20px;        }        .signature {            margin-top: 50px;            font-size: 24px;            font-style: italic;            color: #FF5733;        }    </style></head><body>    <h1>Happy Birthday, Parth!</h1>    <p>Wishing you all the best on your special day.</p>    <p>May all your dreams come true and may you have a year filled with happiness and joy.</p>    <p>Best wishes,</p>    <p class='signature'>Bhargav</p></body></html>"
+};
+
+// send email
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log('Email sent: ' + info.response);
+    }
+});
 
 
 
